@@ -4,7 +4,10 @@
 - https://github.com/phcollignon/helm3
 - https://helm.sh/
 - https://artifacthub.io/
-- https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/#ServiceSpec
+- https://kubernetes.io/docs/reference/kubernetes-api
+- https://spring.io/guides/gs/accessing-data-mysql
+- https://helm.sh/docs/intro/install/
+- https://github.com/asinghalgit/spring-boot-mysql-helm
 
 #### What is the context of using helm?
 ![screenshot1](screenshot1.PNG)
@@ -83,6 +86,15 @@ Default namespace but you can tell Helm to use different namespace
 ![screenshot15](screenshot15.PNG)
 
 #### How to install Helm?
+
+```
+- curl -LO https://get.helm.sh/helm-v3.5.4-linux-amd64.tar.gz
+- tar -zxvf helm-v3.5.4-linux-amd64.tar.gz 
+- sudo mv linux-amd64/helm /usr/local/bin/helm
+- helm help
+- helm repo add stable https://charts.helm.sh/stable
+- helm search repo stable
+```
 ![screenshot16](screenshot16.PNG)
 
 ![screenshot17](screenshot17.PNG)
@@ -93,6 +105,19 @@ Default namespace but you can tell Helm to use different namespace
 Helm is by default not configured to use any repository. So it has to be manually configured.
 
 #### How to add official Helm chart repository? Also give an example of installing sample chart.
+
+```
+- helm search repo stable
+- helm repo update
+- helm install stable/mysql --generate-name
+- helm show chart stable/mysql
+- helm show all stable/mysql
+- helm ls
+- helm list
+- helm uninstall smiling-penguin
+- helm status smiling-penguin
+```
+
 ![screenshot19](screenshot19.PNG)
 ![screenshot20](screenshot20.PNG)
 
@@ -126,8 +151,11 @@ Via uninstall command
 
 #### Let's do some exercise
 
-- deploy spring-boot-hello-app using helm
+- deploy standalone spring-boot-hello-app using helm
 
+```
+- 
+```
 ![screenshot30](screenshot30.PNG)
 ![screenshot31](screenshot31.PNG)
 ![screenshot32](screenshot32.PNG)
@@ -136,5 +164,60 @@ Via uninstall command
 ![screenshot35](screenshot35.PNG)
 ![screenshot36](screenshot36.PNG)
 ![screenshot37](screenshot37.PNG)
+![screenshot39](screenshot39.PNG)
+![screenshot40](screenshot40.PNG)
+
+- deploy enterprise app (UI + backend + DB) using helm
+
+![screenshot38](screenshot38.PNG)
+
+
+- example of installing Guestbook release (1.0 -> 2.0) -> 1.0)
+
+```
+- helm install demo-guestbook guestbook
+- kubectl get pods -l app=frontend
+- helm list --short
+- helm get manifest demo-guestbook | less
+- helm upgrade demo-guestbook guestbook
+- kubectl describe pods -l app=frontend
+- helm status demo-guestbook
+- helm rollback demo-guestbook 1
+- helm history demo-guestbook
+- helm uninstall demo-guestbook
+```
+
+![screenshot41](screenshot41.PNG)
+![screenshot42](screenshot42.PNG)
+![screenshot43](screenshot43.PNG)
+![screenshot44](screenshot44.PNG)
+![screenshot45](screenshot45.PNG)
+![screenshot46](screenshot46.PNG)
+![screenshot47](screenshot47.PNG)
+
+- example of installing spring-boot-mysql-app
+
+```
+- helm create spring-boot
+- tree spring-boot
+- helm install demo-spring-boot spring-boot
+- helm list --short
+- helm status demo-spring-boot
+- helm history demo-spring-boot
+- helm get manifest demo-spring-boot
+```
+
+Source Code - https://github.com/asinghalgit/spring-boot-mysql-helm
+
+![screenshot48](screenshot48.PNG)
+![screenshot48](screenshot49.PNG)
+![screenshot50](screenshot50.PNG)
+![screenshot51](screenshot51.PNG)
+![screenshot52](screenshot52.PNG)
+![screenshot53](screenshot53.PNG)
+![screenshot54](screenshot54.PNG)
+![screenshot55](screenshot55.PNG)
+![screenshot56](screenshot56.PNG)
+![screenshot57](screenshot57.PNG)
 
 
